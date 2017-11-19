@@ -36,14 +36,32 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        'request' => [
+            'class' => '\yii\web\Request',
+            'enableCookieValidation' => false,
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+        'response' => [
+            'formatters' => [
+                \yii\web\Response::FORMAT_JSON => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                ],
+            ],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/movie'],
             ],
         ],
-        */
+    ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
     ],
     'params' => $params,
 ];
